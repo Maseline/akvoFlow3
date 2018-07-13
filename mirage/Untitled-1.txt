@@ -1,0 +1,63 @@
+//controllers needed
+
+navSurveysMain: Ember.Route.extend({
+        route: '/main',
+        connectOutlets: function (router, event) {
+          router.get('navSurveysController').connectOutlet({
+            name: 'navSurveysMain'
+          });
+          FLOW.projectControl.populate();
+          FLOW.cascadeResourceControl.populate();
+          FLOW.projectControl.set('currentProject', null);
+          FLOW.projectControl.set('newlyCreated', null);
+          FLOW.selectedControl.set('selectedQuestionGroup', null);
+          FLOW.selectedControl.set('selectedSurvey', null);
+          FLOW.selectedControl.set('selectedQuestion', null);
+          FLOW.questionControl.set('OPTIONcontent', null);
+        }
+      }),
+      
+//selectedControl 
+FLOW.selectedControl = Ember.Controller.create({
+  selectedSurveyGroup: null,
+  selectedSurvey: null,
+  selectedSurveys: [],
+  selectedSurveyAllQuestions: null,
+  selectedSurveyAssignment: null,
+  dependentQuestion: null,
+  selectedQuestionGroup: null,
+  selectedQuestion: null,
+  selectedOption: null,
+  selectedDevice: null,
+  selectedDevices: [],
+  selectedDevicesPreview: [],
+  selectedSurveysPreview: [],
+  selectedForMoveQuestionGroup: null,
+  selectedForCopyQuestionGroup: null,
+  selectedForMoveQuestion: null,
+  selectedForCopyQuestion: null,
+  selectedCreateNewGroup: false,
+  selectedSurveyOPTIONQuestions: null,
+  selectedCascadeResource:null,
+  selectedCaddisflyResource:null,
+  radioOptions: "",
+  cascadeImportNumLevels: null,
+  cascadeImportIncludeCodes: null,
+
+  // OptionQuestions:function (){
+  //   console.log('optionquestions 1');
+  // }.observes('this.selectedSurveyOPTIONQuestions'),
+
+  // when selected survey changes, deselect selected surveys and question groups
+  deselectSurveyGroupChildren: function () {
+    FLOW.selectedControl.set('selectedSurvey', null);
+    FLOW.selectedControl.set('selectedSurveyAllQuestions', null);
+    FLOW.selectedControl.set('selectedQuestionGroup', null);
+    FLOW.selectedControl.set('selectedQuestion', null);
+  }.observes('this.selectedSurveyGroup'),
+
+  deselectSurveyChildren: function () {
+    FLOW.selectedControl.set('selectedQuestionGroup', null);
+    FLOW.selectedControl.set('selectedQuestion', null);
+  }.observes('this.selectedSurvey')
+});

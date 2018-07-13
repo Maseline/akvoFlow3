@@ -5,6 +5,7 @@ import config from './config/environment';
 
 const App = Application.extend({
   modulePrefix: config.modulePrefix,
+  locale: 'de',
   podModulePrefix: config.podModulePrefix,
   Resolver
 });

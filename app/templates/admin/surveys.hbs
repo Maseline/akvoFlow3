@@ -1,0 +1,92 @@
+<section class="topBar">
+  <nav class="breadCrumb">
+    <ul>
+      <li>
+        <a class="homeRoot" {{action "selectRootProject"}}>{{t "_home"}}</a>
+      </li>
+      {{#each breadCrumbs as |sg|}} 
+        <li>
+          <a {{action "selectProject" sg}}>{{sg.code}}</a>
+        </li>
+      {{/each}}
+    </ul>
+  </nav>
+  {{#if projectListView}}
+    {{#if moveTarget}}
+      <nav class="menuTopbar actionHighLighted">
+        <ul>
+          <li><p>{{t "_moving"}} <span class="itemMoved">{{moveTarget.code}}</span> {{moveTargetType}}</p></li>
+          <li><a class="moveAction button" {{action "endMoveProject"}}>{{t "_move_here"}}</a></li>
+          <li><a class="redCancel  btnOutline" {{action "cancelMoveProject"}}>{{t "_cancel"}}</a></li>
+        </ul>
+      </nav>
+      {{else}}
+        {{#if copyTarget}}
+            <nav class="menuTopbar actionHighLighted">
+              <ul>
+                <li><p>{{t "_copying"}} <span class="itemMoved">{{copyTarget.code}}</span></p></li>
+                <li><a class="moveAction button" {{action "endCopyProject"}}>{{t "_copy_here"}}</a></li>
+                <li><a class="redCancel btnOutline" {{action "cancelCopyProject"}}>{{t "_cancel"}}</a></li>
+              </ul>
+            </nav>
+          {{else}}
+            <nav class="menuTopbar">
+              <ul>
+              {{#if disableAddFolderButton }}
+                <li><a class="addFolder noChanges">{{t "_add_folder"}}</a></li>
+              {{else}}
+                <li><a class="addFolder" {{action "createProjectFolder"}}>{{t "_add_folder"}}</a></li>
+              {{/if}}
+              {{#if disableAddSurveyButton }}
+                <li><a class="addSurvey noChanges">{{t "_create_new_survey"}}</a></li>
+              {{else}}
+                {{#if disableAddSurveyButtonInRoot}}
+                  <li><a class="addSurvey noChanges tooltip" title={{t "_survey_only_in_folder"}} >{{t "_create_new_survey"}}</a></li>
+                {{else}}
+                  <li><a class="addSurvey" {{action "createProject"}}>{{t "_create_new_survey"}}</a></li>
+                {{/if}}
+              {{/if}}
+              </ul>
+            </nav>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        <nav class="menuTopbar">
+          <ul>
+            {{#if hasUnsavedChanges}}
+              <li><a class="saveProject" {{action 'saveProject' target="surveys"}}>{{t "_save"}}</a></li>
+            {{else}}
+              <li><a class="saveProject noChanges">{{t "_save"}}</a></li>
+            {{/if}}
+          </ul>
+        </nav>
+      {{/if}}
+</section>
+{{#if projectListView}}
+<div class="floats-in">
+  <div id="pageWrap" class="widthConstraint belowHeader">
+    <section id="allSurvey" class="surveyList">
+      <ul class={{folderListClass}}> 
+        {{#each currentFolders as |pk|}} 
+          {{folder-item copyTarget=copyTarget 
+                   moveTarget=moveTarget 
+                   isProjectFolder=isProjectFolder
+                   isProjectFolderEmpty=isProjectFolderEmpty
+                   selectproject=(action 'selectProject')
+                   currentFolderPermissions=currentFolderPermissions
+                   deleteproject=(action 'deleteProject') 
+                   beginmoveproject=(action 'beginMoveProject')
+                   begincopyproject=(action 'beginCopyProject')
+                   newlyCreated=newlyCreated
+                   currentProjectPath=currentProjectPath
+                   pk=pk
+                   model=model}} 
+        {{/each}}  
+      </ul>
+    </section>
+  </div>
+</div>
+{{/if}}
+{{#if projectView}} 
+  {{outlet}}
+{{/if}} 

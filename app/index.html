@@ -1,22 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AkvoFlow</title>
-    <meta name="description" content="">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Akvo Flow Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>AkvoFlow</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!-- Stylesheets -->
+<!--     
+    <link rel="stylesheet" href="styles/screen.css" media="screen,projection" /> -->
     {{content-for "head"}}
-
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
-    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/akvo-flow.css">
+    <link integrity="" rel="stylesheet" href="{{rootURL}}assets/akvo-flow.css" media="screen,projection">
 
     {{content-for "head-footer"}}
   </head>
   <body>
     {{content-for "body"}}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.2/jquery.min.js" integrity="sha384-TlirNbKpD2RIgh6I9thXvaNiNhPn2e4sI0Adwq4SwWXvDMdol60LTz9m/24VynHW" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" integrity="sha384-TRmDLt6CvOQBqWp02sWDp/VVYxlkm9lvqzMt7OwAoSHqmGtELVfE/pfkH3zcea8j" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.2/jquery.dataTables.min.js" integrity="sha384-l4ztyMkjOikIXT8yH7aYF35ElUqxfPgSf9d+fUgST1ZgUFJ8/PD4ZNc8tk49GQxx" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v2.min.js" integrity="sha384-gx6v00JjfKi4ORqjqvNMGihiXcXyB12C+0TucXBJiJsSG5n6e3fBGqMJXUwcSrG+" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/resumable.js/1.0.3/resumable.min.js" integrity="sha384-iybtPyEliVnE9VSRDxi4RtPJDCth3R0Gj90w5Puf1cT/R8GYnPiXu10MMWITqiit" crossorigin="anonymous"></script>
+    
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/akvo-flow.js"></script>
 

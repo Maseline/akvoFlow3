@@ -1,0 +1,60 @@
+{{#if isFolder}}
+    {{#if folderEdit}}
+        <a {{action "saveFolderName" pk}} class="editingFolderName">
+            {{t "_edit_folder_name"}}
+        </a>
+        {{input value=pk.code}}
+    {{else}}
+        {{#if showSurveyEditButton}}
+            <a {{action "toggleEditFolderName"}} class="editFolderName">
+                {{t "_edit_folder_name"}}
+            </a>
+        {{/if}}
+            <a {{action "selectProject" pk }}> 
+                <h2>{{pk.code}}</h2>
+            </a>
+    {{/if}}
+        <nav>
+            <ul>
+                {{#unless hideFolderSurveyDeleteButton}}
+                    <li class="deleteSurvey"><a {{action "deleteProject" pk}}>{{t "_delete"}}</a></li>
+                {{/unless}}
+                {{#if showSurveyMoveButton}}
+                    <li class="moveSurvey"><a {{action "beginMoveProject" pk}}>{{t "_move"}}</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+{{else}}
+            <a {{action "selectProject" pk}}>
+                <h2>{{pk.code}}</h2>
+            </a>
+            <ul class="surveyInfo floats-in">
+                  <li class="dateCreated"><span>{{t "_created"}}</span><p>{{created}}</p></li>
+                  <li class="responseNumber"><span>{{t "_responses"}}</span></li>
+                  <li class="dateModified"><span>{{t "_modified"}}</span><p>{{modified}}</p></li>
+                  <li class="surveyType"><span>{{t "_type"}}</span><p>
+                    {{#if isPrivate}}
+                      {{t "_private"}}
+                    {{else}}
+                      {{t "_public"}}
+                    {{/if}}
+                  </p></li>
+                  <li class="surveyLanguage"><span>{{t "_language"}}</span><p>{{language}}</p></li>
+            </ul>
+            <nav>
+                <ul>
+                    {{#if showSurveyEditButton}}
+                      <li class="editSurvey"><a {{action "selectProject" pk}}>{{t "_edit"}}</a></li>
+                    {{/if}}
+                    {{#if showSurveyMoveButton}}
+                      <li class="moveSurvey"><a {{action "beginMoveProject" pk}}>{{t "_move"}}</a></li>
+                    {{/if}}
+                    {{#unless hideFolderSurveyDeleteButton}}
+                      <li class="deleteSurvey"><a {{action "deleteProject" pk}}>{{t "_delete"}}</a></li>
+                    {{/unless}}
+                    {{#if showSurveyCopyButton}}
+                      <li class="copySurvey" ><a {{action "beginCopyProject" pk}}>{{t "_copy"}}</a></li>
+                    {{/if}}
+                </ul>
+            </nav>
+        {{/if}}

@@ -1,0 +1,94 @@
+<section class="noFormsContainer"> 
+    {{#unless hasForms}}
+        <ul>
+            <li class="formList"><p class="noForms">{{t "_no_forms_in_this_survey"}}</p></li>
+            {{#if showAddNewFormButton}}
+            <li><a class="addMenuAction aBtn addNewForm" {{action "createForm" }}>{{t "_add_new_form"}}</a></li>
+            {{/if}}
+        </ul>
+    {{/unless}}
+</section>
+<section class="forms">
+    {{#if hasForms}}
+        <div id="tabs">
+            {{#if surveysController.currentProject.monitoringGroup}}
+                {{#if showAddNewFormButton}}
+                  <nav class="menuTopbar">
+                    <ul>
+                      <li>  <a {{action "createForm"}} class="button addFormBtn" >{{t "_add_new_form"}}</a></li>
+                    </ul>
+                  </nav>                      
+                {{/if}}
+            {{/if}}
+        </div>
+        <nav class="tabNav floats-in">
+            <ul>
+                {{#each content as |form|}}
+                    {{form-breadcrumbs form=form currentProject=surveysController.currentProject selectedSurvey=selectedSurvey}}
+                {{/each}}
+            </ul>
+        </nav>
+		
+        <section class="formsContainer"> 
+            <div id="form01" class="{{if isPublished 'published'}}">
+                {{#if selectedSurvey}}
+                	<h3>{{selectedSurvey.name}}</h3> 
+                        <div id="form01" class="aformContainer">
+	                        <nav class="newSurveyNav">
+		                        <ul>
+			                        {{#if showFormPublishButton}}
+			                        <li><a class="publishNewSurvey" {{action "publishSurvey"}}>{{t "_publish"}}</a></li>
+			                        {{/if}}
+			                        <li><a class="previewNewSurvey" {{action "showPreview"}}>{{t "_preview"}}</a></li>
+			                        {{#if showFormDeleteButton}}
+				                    <li><a class="deleteSurvey" >{{t "_delete"}}</a></li>
+									{{!-- {{action confirm FLOW.dialogControl.delForm target="FLOW.dialogControl"}} --}}
+			                        {{/if}}
+		                        </ul>
+	                        </nav>
+	                        <ul class="formSummary">
+		                        <li>{{t "_version"}}<span class="formVersion">{{selectedSurvey.version}}</span></li>
+		                        <li><span class="upCase">{{t "_id"}}</span><span class="formID">{{selectedSurvey.keyId}}</span></li>
+		                        <li>{{t "_questions"}}<span class="formQuestionCount">{{questionCount}}</span></li>
+	                        </ul>
+	                        <section class="formDetails">
+		                        <h3>{{t "_form_basics"}}</h3>
+		                        {{#if visibleFormBasics}}
+			                        {{#unless isNewForm}}
+				                    <a {{action "toggleShowFormBasics"}} class="button">{{t "_collapse"}}</a>
+			                        {{/unless}}
+			                        <form class="surveyDetailForm" {{action 'saveProject' on='submit'}}>
+				                        <label>{{t "_form_title"}}</label>
+				                        {{!-- {{view Ember.TextField valueBinding="form.name" disabledBinding="view.disableFormFields"}} --}}
+				                        {{input value=selectedSurvey.name disable=disableFormFields }}
+										<nav class="newSurveyNav">
+					                        <ul class="manageStuff">
+					                            {{#if showFormTranslationsButton}}
+						                            <li><a class="btnOutline" {{action "doManageTranslations"}}>{{t "_manage_translations"}}</a></li>
+						                            <li><a class="btnOutline" {{action "doManageNotifications"}}>{{t "_manage_notifications"}}</a></li>
+					                            {{/if}}
+					                        </ul>
+				                        </nav>
+			                        </form>
+		                        {{else}}
+			                        <a {{action "toggleShowFormBasics"}} class="button">{{t "_show"}}</a>
+		                        {{/if}}
+	                        </section>
+	                        <section class="surveyForm">
+		                        {{#if manageTranslations}}
+			                        {{!-- {{view FLOW.TranslationsView}} --}}
+		                        {{else}}
+			                        {{#if manageNotifications}}
+				                        {{!-- {{view FLOW.NotificationsView}} --}}
+			                        {{else}}
+				                        {{!-- {{view FLOW.EditQuestionsView}} --}}
+			                        {{/if}}
+		                        {{/if}}
+	                        </section>
+                        </div>
+                	{{/if}}
+            	</div>
+    	</section>
+	{{/if}}
+</section>
+
